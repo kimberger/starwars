@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
+import debounce from "debounce";
 
 const App = () => {
   const [response, updateResponse] = useState({});
@@ -8,10 +9,13 @@ const App = () => {
   const nextLink = response.next;
   const previousLink = response.previous;
 
-  const search = async (url) => {
-    const response = await axios.get(url);
-    updateResponse(response.data || {});
-  };
+  const search = useCallback(
+    debounce(async (url) => {
+      const response = await axios.get(url);
+      updateResponse(response.data || {});
+    }, 500),
+    []
+  );
 
   const onChange = (event) => {
     const value = event.target.value;
