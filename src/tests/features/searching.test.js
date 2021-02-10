@@ -36,4 +36,10 @@ describe("Searching for people", () => {
     fireEvent.change(getByLabelText("Character"), { target: { value: "r" } });
     getByText("Loading...");
   });
+
+  it("does not display loading state on page load", async () => {
+    const { queryByText } = render(<App />);
+    const loadingElement = queryByText("Loading...");
+    expect(loadingElement).not.toBeInTheDocument();
+  });
 });
