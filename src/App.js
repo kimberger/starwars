@@ -18,12 +18,7 @@ const App = () => {
     <>
       <div>
         <label htmlFor="character-search">Character</label>
-        <input
-          id="character-search"
-          className="input"
-          value={searchValue}
-          onChange={onChange}
-        />
+        <input id="character-search" value={searchValue} onChange={onChange} />
       </div>
       {loading ? (
         <p>Loading...</p>
