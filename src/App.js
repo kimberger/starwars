@@ -2,20 +2,21 @@ import { useState } from "react";
 import axios from "axios";
 
 const App = () => {
-  const [results, updateResults] = useState([]);
+  const [response, updateResponse] = useState({});
   const [searchValue, updateSearchValue] = useState("");
 
-  const search = async (value) => {
-    const response = await axios.get(
-      `https://swapi.dev/api/people/?search=${value}`
-    );
-    updateResults(response.data.results);
+  const nextLink = response.next;
+  const previousLink = response.previous;
+
+  const search = async (url) => {
+    const response = await axios.get(url);
+    updateResponse(response.data || {});
   };
 
   const onChange = (event) => {
     const value = event.target.value;
     updateSearchValue(value);
-    search(value);
+    search(`https://swapi.dev/api/people/?search=${value}`);
   };
 
   return (
@@ -29,9 +30,15 @@ const App = () => {
           onChange={onChange}
         />
       </div>
-      {results.map((result) => (
+      {response.results?.map((result) => (
         <div key={result.name}>{result.name}</div>
       ))}
+      <button disabled={!previousLink} onClick={() => search(previousLink)}>
+        Previous
+      </button>
+      <button disabled={!nextLink} onClick={() => search(nextLink)}>
+        Next
+      </button>
     </>
   );
 };
