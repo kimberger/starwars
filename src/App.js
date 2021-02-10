@@ -4,14 +4,16 @@ import debounce from "debounce";
 
 const App = () => {
   const [response, updateResponse] = useState({});
+  const [loading, updateLoading] = useState(false);
   const [searchValue, updateSearchValue] = useState("");
 
-  const nextLink = response.next;
-  const previousLink = response.previous;
+  const nextLink = !loading && response.next;
+  const previousLink = !loading && response.previous;
 
   const search = useCallback(
     debounce(async (url) => {
       const response = await axios.get(url);
+      updateLoading(false);
       updateResponse(response.data || {});
     }, 500),
     []
@@ -20,6 +22,7 @@ const App = () => {
   const onChange = (event) => {
     const value = event.target.value;
     updateSearchValue(value);
+    updateLoading(true);
     search(`https://swapi.dev/api/people/?search=${value}`);
   };
 
@@ -34,13 +37,29 @@ const App = () => {
           onChange={onChange}
         />
       </div>
-      {response.results?.map((result) => (
-        <div key={result.name}>{result.name}</div>
-      ))}
-      <button disabled={!previousLink} onClick={() => search(previousLink)}>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        response.results?.map((result) => (
+          <div key={result.name}>{result.name}</div>
+        ))
+      )}
+      <button
+        disabled={!previousLink}
+        onClick={() => {
+          updateLoading(true);
+          search(previousLink);
+        }}
+      >
         Previous
       </button>
-      <button disabled={!nextLink} onClick={() => search(nextLink)}>
+      <button
+        disabled={!nextLink}
+        onClick={() => {
+          updateLoading(true);
+          search(nextLink);
+        }}
+      >
         Next
       </button>
     </>

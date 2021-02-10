@@ -30,4 +30,10 @@ describe("Searching for people", () => {
     await findByText("R2-D2");
     expect(axiosSpy).toHaveBeenCalledTimes(1);
   });
+
+  it("displays loading state while waiting for response", async () => {
+    const { getByLabelText, getByText } = render(<App />);
+    fireEvent.change(getByLabelText("Character"), { target: { value: "r" } });
+    getByText("Loading...");
+  });
 });
