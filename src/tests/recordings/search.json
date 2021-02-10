@@ -1,0 +1,68 @@
+[
+  {
+    "scope": "https://swapi.dev:443",
+    "method": "GET",
+    "path": "/api/people/?search=r2",
+    "body": "",
+    "status": 200,
+    "response": {
+      "count": 1,
+      "next": null,
+      "previous": null,
+      "results": [
+        {
+          "name": "R2-D2",
+          "height": "96",
+          "mass": "32",
+          "hair_color": "n/a",
+          "skin_color": "white, blue",
+          "eye_color": "red",
+          "birth_year": "33BBY",
+          "gender": "n/a",
+          "homeworld": "http://swapi.dev/api/planets/8/",
+          "films": [
+            "http://swapi.dev/api/films/1/",
+            "http://swapi.dev/api/films/2/",
+            "http://swapi.dev/api/films/3/",
+            "http://swapi.dev/api/films/4/",
+            "http://swapi.dev/api/films/5/",
+            "http://swapi.dev/api/films/6/"
+          ],
+          "species": [
+            "http://swapi.dev/api/species/2/"
+          ],
+          "vehicles": [],
+          "starships": [],
+          "created": "2014-12-10T15:11:50.376000Z",
+          "edited": "2014-12-20T21:17:50.311000Z",
+          "url": "http://swapi.dev/api/people/3/"
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Server",
+      "nginx/1.16.1",
+      "Date",
+      "Fri, 05 Feb 2021 10:30:48 GMT",
+      "Content-Type",
+      "application/json",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "keep-alive",
+      "Vary",
+      "Accept, Cookie",
+      "ETag",
+      "\"0122146b6985b00cc06d6fde71943c44\"",
+      "Allow",
+      "GET, HEAD, OPTIONS",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "Access-Control-Allow-Origin",
+      "*",
+      "Strict-Transport-Security",
+      "max-age=15768000"
+    ],
+    "responseIsBinary": false
+  }
+]
