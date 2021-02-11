@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useGet } from "./hooks";
+import styles from "./App.module.css";
+import { Button } from "./ui";
+import { Search } from "./components";
 
 const App = () => {
   const [searchValue, updateSearchValue] = useState("");
@@ -15,11 +18,13 @@ const App = () => {
   };
 
   return (
-    <>
-      <div>
-        <label htmlFor="character-search">Character</label>
-        <input id="character-search" value={searchValue} onChange={onChange} />
-      </div>
+    <div className={styles.app}>
+      <Search
+        id="character-search"
+        value={searchValue}
+        onChange={onChange}
+        label="Character"
+      />
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -27,13 +32,13 @@ const App = () => {
           <div key={result.name}>{result.name}</div>
         ))
       )}
-      <button disabled={!previousLink} onClick={() => search(previousLink)}>
+      <Button disabled={!previousLink} onClick={() => search(previousLink)}>
         Previous
-      </button>
-      <button disabled={!nextLink} onClick={() => search(nextLink)}>
+      </Button>
+      <Button disabled={!nextLink} onClick={() => search(nextLink)}>
         Next
-      </button>
-    </>
+      </Button>
+    </div>
   );
 };
 
