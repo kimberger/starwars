@@ -1,0 +1,22 @@
+.card {
+  border: 1px solid #FFE81F;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.attributeList ul {
+  margin: 0;
+}
+
+.attributeList dt {
+  float: left;
+  width: 100px;
+  text-align: right;
+  font-weight: bold;
+  color: #00D200;
+}
+
+.attributeList dd {
+  margin: 0 0 0 110px;
+  padding: 0 0 0.5em 0;
+}

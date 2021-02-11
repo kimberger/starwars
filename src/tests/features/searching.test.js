@@ -36,7 +36,7 @@ describe("Searching for people", () => {
     const { getByLabelText, getByText, findByText } = renderWithRouter(<App />);
     fireEvent.change(getByLabelText("Character"), { target: { value: "r2" } });
     fireEvent.click(await findByText("R2-D2"));
-    await waitFor(() => getByText("Birth Year: 33BBY"));
+    await waitFor(() => getByText("33BBY"));
   });
 
   it("displays loading state while waiting for response", async () => {

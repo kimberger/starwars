@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "@reach/router";
 import axios from "axios";
+
+import { CharacterCard } from "../components";
 
 const Character = ({ id }) => {
   const [character, updateCharacter] = useState();
-  const [films, updateFilms] = useState([]);
 
   const getCharacter = async (id) => {
     const response = await axios.get(`https://swapi.dev/api/people/${id}/`);
@@ -13,23 +15,22 @@ const Character = ({ id }) => {
         return filmResponse.data.title;
       })
     );
-    updateCharacter(response.data);
-    updateFilms(filmTitles);
+    updateCharacter({ ...response.data, films: filmTitles });
   };
 
   useEffect(() => {
     getCharacter(id);
   }, [id]);
 
-  return character ? (
+  if (!character) return <p>Loading...</p>;
+
+  return (
     <>
-      <p>Birth Year: {character.birth_year}</p>
-      {films.map((film) => (
-        <p key={film}>{film}</p>
-      ))}
+      <p>
+        <Link to="/">Back To Search</Link>
+      </p>
+      <CharacterCard {...character} />
     </>
-  ) : (
-    <p>Loading...</p>
   );
 };
 
