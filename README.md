@@ -20,7 +20,6 @@ on installing and using nvm.
 ### Considerations
 
 - Caching of character and film requests
-- Debounce test causes future tests within the suite to fail. Failing to clean up properly?
 - Lower level testing at ui/component level
 - Add error handling
 - Isolate axios usage to make it easier to replace the library in future
