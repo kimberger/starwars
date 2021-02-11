@@ -1,35 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "@reach/router";
-import axios from "axios";
 
+import { useGet } from "../hooks";
 import { CharacterCard } from "../components";
 
 const Character = ({ id }) => {
-  const [character, updateCharacter] = useState();
+  const [character, getCharacter] = useGet({ initialLoading: true });
+  const [films, getFilms] = useGet();
 
-  const getCharacter = async (id) => {
-    const response = await axios.get(`https://swapi.dev/api/people/${id}/`);
-    const filmTitles = await Promise.all(
-      response.data.films.map(async (film) => {
-        const filmResponse = await axios.get(film);
-        return filmResponse.data.title;
-      })
-    );
-    updateCharacter({ ...response.data, films: filmTitles });
-  };
+  const filmTitles = films.responses?.map((film) => film.title);
 
   useEffect(() => {
-    getCharacter(id);
-  }, [id]);
+    getCharacter(`https://swapi.dev/api/people/${id}/`);
+    getFilms(character.response?.films);
+  }, [id, character.response.films, getCharacter, getFilms]);
 
-  if (!character) return <p>Loading...</p>;
+  if (character.loading) return <p>Loading...</p>;
 
   return (
     <>
       <p>
         <Link to="/">Back To Search</Link>
       </p>
-      <CharacterCard {...character} />
+      <CharacterCard {...{ ...character.response, films: filmTitles }} />
     </>
   );
 };

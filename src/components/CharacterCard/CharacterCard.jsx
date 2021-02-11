@@ -22,7 +22,7 @@ const CharacterCard = (character) => (
       <dt>Films</dt>
       <dd>
         <ul>
-          {character.films.map((film) => (
+          {character.films?.map((film) => (
             <li key={film}>{film}</li>
           ))}
         </ul>
