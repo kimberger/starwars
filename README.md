@@ -12,6 +12,11 @@ on installing and using nvm.
 
 - `yarn test` or `npm test`
 
+### Bundle analysis
+
+- `yarn build` or `npm build`
+- `yarn analyze` or `npm analyze`
+
 ### Considerations
 
 - Caching of character and film requests
