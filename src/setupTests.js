@@ -8,6 +8,7 @@ import nock from "nock";
 beforeEach(() => {
   nock.disableNetConnect();
   nock.load(__dirname + "/tests/recordings/search.json");
+  nock.load(__dirname + "/tests/recordings/characters.json");
 });
 
 afterEach((done) => {

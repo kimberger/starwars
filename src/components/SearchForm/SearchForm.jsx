@@ -1,7 +1,7 @@
 import { Input } from "../../ui";
-import styles from "./Search.module.css";
+import styles from "./SearchForm.module.css";
 
-const Search = ({ label, id, value, onChange }) => {
+const SearchForm = ({ label, id, value, onChange }) => {
   return (
     <div className={styles.search}>
       <label className={styles.label} htmlFor={id}>
@@ -12,4 +12,4 @@ const Search = ({ label, id, value, onChange }) => {
   );
 };
 
-export default Search;
+export default SearchForm;
