@@ -1,4 +1,5 @@
 import { fireEvent, waitFor } from "@testing-library/react";
+import axios from "axios";
 
 import { renderWithRouter } from "../helpers";
 import App from "../../App";
@@ -20,6 +21,16 @@ describe("Searching for people", () => {
 
     fireEvent.click(await findByText("Previous"));
     await waitFor(() => getByText("Luke Skywalker"));
+  });
+
+  it("debounces requests to the starwars api", async () => {
+    const axiosSpy = jest.spyOn(axios, "get");
+    const { getByLabelText, getByText } = renderWithRouter(<App />);
+    fireEvent.change(getByLabelText("Character"), { target: { value: "x" } });
+    fireEvent.change(getByLabelText("Character"), { target: { value: "r2" } });
+    await waitFor(() => getByText("R2-D2"));
+    expect(axiosSpy).toHaveBeenCalledTimes(1);
+    axiosSpy.mockRestore();
   });
 
   it("allows user to view character details", async () => {
