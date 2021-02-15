@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { Link } from "@reach/router";
 
-import { useGet } from "../hooks";
+import { useGet, useGetAll } from "../hooks";
 import { CharacterCard } from "../components";
 
 const Character = ({ id }) => {
   const [character, getCharacter] = useGet({ initialLoading: true });
-  const [films, getFilms] = useGet();
+  const [films, getFilms] = useGetAll();
 
   const filmTitles = films.responses?.map((film) => film.title);
 

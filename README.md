@@ -24,3 +24,4 @@ on installing and using nvm.
 - Add error handling
 - Isolate axios usage to make it easier to replace the library in future
 - Implement code splitting
+- Change http calls to https before making request so that it works on secure sites
